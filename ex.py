@@ -1,66 +1,78 @@
-import random
-
-#Sous Programmes
+#Sous Programme
 
 def saisir():
 	n = int(input("n = "))
-	while n<=2 or n>=10:
+	while not(2<=n<=15):
 		n = int(input("n = "))
 	return n
 
-
 def remplir(n):
-	M=[]
+	M = []
+
 	for i in range(n):
-		t=[]
+		t = []
 		for j in range(n):
-			t.append(chr(random.randint(65,90)))
+			x = input(f"M[{i},{j}] = ")
+			while not(65<=ord(x)<=90):
+				x = input(f"M[{i},{j}] = ")
+
+			t.append(x)
 		M.append(t)
 	return M
 
+
 def Affiche(M,n):
-	ligne(M,n)
-	colonne(M,n)
-	diag(M,n)
-	antiDiag(M,n)
+	nl = 0
+	nc = 0
+	mc = ""
+	ml = ""
+	ch = ""
+	for i in range(n):
+		ch=""
+		for j in range(n):
+			ch+=M[i][j]
+		if (ch==reverse(ch)):
+			ml+=ch+"*"
+			nl+=1
 
-def ligne(M,n):
-	print("Ligne:")
 	for i in range(n):
+		ch=""
 		for j in range(n):
-			print(M[i][j],end="")
-		print()
+			ch+=M[j][i]
+		if (ch == reverse(ch)):
+			mc+=ch+"*"
+			nc+=1
+	ml = ml[0:len(ml)-1]
+	mc = mc[0:len(mc)-1]
+	print(ml)
+	print(nl)
+	print(mc)
+	print(nc)
 
-def colonne(M,n):
-	print("Colonne:")
-	for i in range(n):
-		for j in range(n):
-			print(M[j][i],end="")
-		print()
+def reverse (x):
+	s = ""
+	for i in range(len(x)-1,-1,-1):
+		s+=x[i]
+	
+	return s
 
-def diag(M,n):
-	print("Diag:")
-	for i in range(n):
-		for j in range(n):
-			if (i==j):
-				print(M[i][j],end="")
-	print()
-def antiDiag(M,n):
-	print("AntiDiag:")
-	for i in range(n):
-		for j in range(n):
-			if (i+j == n-1):
-				print(M[i][j],end="")
 
 
 
 #Programme Principale
 
+
 n = saisir()
 M = remplir(n)
 Affiche(M,n)
 
-#GG EZ
+
+
+
+
+
+
+
 
 
 
